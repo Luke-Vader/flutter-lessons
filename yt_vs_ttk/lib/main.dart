@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 void main() {
   return runApp(MaterialApp(
@@ -15,13 +16,19 @@ class VotePage extends StatefulWidget {
 }
 
 class _VotePageState extends State<VotePage> {
+  
   int tik = 0;
   int yt = 0;
 
   @override
   Widget build(BuildContext context) {
+
+    FirebaseDatabase.instance.reference().orderByKey().equalTo("tiktok").once().then((DataSnapshot data) {
+      tik = data.value;
+    });
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.orange[400],
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -33,6 +40,7 @@ class _VotePageState extends State<VotePage> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 32.0,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -83,10 +91,22 @@ class _VotePageState extends State<VotePage> {
                     onPressed: () {
                       setState(() {
                         tik++;
-                        print("Youtube = " + tik.toString());
+                        FirebaseDatabase.instance.reference().once().then((DataSnapshot data) {
+                          if (data.key.toString() == "tiktok") print(data.value);
+                        });
+                        FirebaseDatabase.instance.reference().update({
+                          'tiktok': tik  
+                        });
+                        print("Tiktok = " + tik.toString());
                       });
                     },
                     child: Container(
+                      decoration: BoxDecoration( 
+                        color: Colors.yellow,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      padding: EdgeInsets.all(24),
                       child: Image.asset("images/tiktok.png"),
                     ),
                   ),
@@ -94,10 +114,19 @@ class _VotePageState extends State<VotePage> {
                     onPressed: () {
                       setState(() {
                         yt++;
+                        FirebaseDatabase.instance.reference().update({
+                          'youtube': yt  
+                        });
                         print("Youtube = " + yt.toString());
                       });
                     },
                     child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      padding: EdgeInsets.all(24),
                       child: Image.asset("images/youtube.png"),
                     ),
                   ),

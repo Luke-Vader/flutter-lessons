@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "508486932686",
+    "firebase_url": "https://vs-tiktok-e34bd.firebaseio.com",
+    "project_id": "vs-tiktok-e34bd",
+    "storage_bucket": "vs-tiktok-e34bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508486932686:android:92807a7681f05efe0a989f",
+        "android_client_info": {
+          "package_name": "com.rishabhbanerjee.ytvsttk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508486932686-e622blt782f5lr7d1o95c699mcevkum3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy54yz_T9wsx6QSVaJhxwKGlonaMz152M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508486932686-e622blt782f5lr7d1o95c699mcevkum3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
