@@ -19,4 +19,16 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  fonts:
+    - family: BalsamiqSans
+      fonts:
+        - asset: fonts/BalsamiqSans-Bold.ttf
+          weight: 900
+        - asset: fonts/BalsamiqSans-BoldItalic.ttf
+          weight: 900
+          style: italic
+        - asset: fonts/BalsamiqSans-Italic.ttf
+          style: italic
+        - asset: fonts/BalsamiqSans-Regular.ttf
+
   uses-material-design: true
