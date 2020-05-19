@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  liquid_progress_indicator: ^0.3.2
   flutter:
     sdk: flutter
 
@@ -19,6 +20,8 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  assets:
+    - images/
   fonts:
     - family: BalsamiqSans
       fonts:
