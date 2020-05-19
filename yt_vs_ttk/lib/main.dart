@@ -16,15 +16,31 @@ class VotePage extends StatefulWidget {
 }
 
 class _VotePageState extends State<VotePage> {
-  
   int tik = 0;
   int yt = 0;
 
   @override
   Widget build(BuildContext context) {
+    FirebaseDatabase.instance
+        .reference()
+        .orderByKey()
+        .equalTo("tiktok")
+        .once()
+        .then((DataSnapshot data) {
+      setState(() {
+        tik = data.value['tiktok'];
+      });
+    });
 
-    FirebaseDatabase.instance.reference().orderByKey().equalTo("tiktok").once().then((DataSnapshot data) {
-      tik = data.value;
+    FirebaseDatabase.instance
+        .reference()
+        .orderByKey()
+        .equalTo("youtube")
+        .once()
+        .then((DataSnapshot data) {
+      setState(() {
+        yt = data.value['youtube'];
+      });
     });
 
     return Scaffold(
@@ -49,7 +65,7 @@ class _VotePageState extends State<VotePage> {
               margin: EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 32.0),
               height: 54.0,
               child: LiquidLinearProgressIndicator(
-                value: tik/(yt+tik),
+                value: tik / (yt + tik),
                 valueColor: AlwaysStoppedAnimation(Colors.cyan[300]),
                 backgroundColor: Colors.red[600],
                 borderRadius: 12,
@@ -90,18 +106,25 @@ class _VotePageState extends State<VotePage> {
                   FlatButton(
                     onPressed: () {
                       setState(() {
+                        FirebaseDatabase.instance
+                            .reference()
+                            .orderByKey()
+                            .equalTo("tiktok")
+                            .once()
+                            .then((DataSnapshot data) {
+                          setState(() {
+                            tik = data.value['tiktok'];
+                          });
+                        });
                         tik++;
-                        FirebaseDatabase.instance.reference().once().then((DataSnapshot data) {
-                          if (data.key.toString() == "tiktok") print(data.value);
-                        });
-                        FirebaseDatabase.instance.reference().update({
-                          'tiktok': tik  
-                        });
+                        FirebaseDatabase.instance
+                            .reference()
+                            .update({'tiktok': tik});
                         print("Tiktok = " + tik.toString());
                       });
                     },
                     child: Container(
-                      decoration: BoxDecoration( 
+                      decoration: BoxDecoration(
                         color: Colors.yellow,
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -113,10 +136,20 @@ class _VotePageState extends State<VotePage> {
                   FlatButton(
                     onPressed: () {
                       setState(() {
-                        yt++;
-                        FirebaseDatabase.instance.reference().update({
-                          'youtube': yt  
+                        FirebaseDatabase.instance
+                            .reference()
+                            .orderByKey()
+                            .equalTo("youtube")
+                            .once()
+                            .then((DataSnapshot data) {
+                          setState(() {
+                            yt = data.value['youtube'];
+                          });
                         });
+                        yt++;
+                        FirebaseDatabase.instance
+                            .reference()
+                            .update({'youtube': yt});
                         print("Youtube = " + yt.toString());
                       });
                     },
